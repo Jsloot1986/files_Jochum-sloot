@@ -23,7 +23,7 @@ def cache_zip(file_path: str, cache_dir_path: str):
     clean_cache()
     wait(3)
     from zipfile import ZipFile
-    ZipFile(zip_file_path).extractall(cache_dir_path)
+    ZipFile(file_path).extractall(cache_dir_path)
     print("files unzipped - ready Files include:")
     return
 
@@ -32,9 +32,7 @@ def wait(seconds):
     time.sleep(seconds)
     return
 
-zip_file_path = os.path.abspath("data.zip")
-cache_dir_path = os.path.join("cache")
-cache_zip(zip_file_path, cache_dir_path)
+cache_zip("data.zip", "cache")
 
 #opdr 3
 def cached_files():
@@ -56,8 +54,9 @@ def find_password(cached_files):
                     file_number = i
                 else:
                     pass
-                line = fp.readline()
-    return signal, file_number
+                line = fp.readline()     
+                
+    print(f'{signal} is in file: {file_number}')
+    return signal.replace("password:", "")
 
-cached_files = cached_files()
-print(find_password(cached_files))
+print(find_password(cached_files()))
