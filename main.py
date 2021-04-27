@@ -57,6 +57,8 @@ def find_password(cached_files):
                 line = fp.readline()     
                 
     print(f'{signal} is in file: {file_number}')
-    return signal.replace("password:", "")
+    password_string = signal.replace("password: ", "")
+    new_password_string = password_string.replace("\n", "")
+    return new_password_string
 
 print(find_password(cached_files()))
